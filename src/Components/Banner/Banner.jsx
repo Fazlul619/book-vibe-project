@@ -1,8 +1,8 @@
 const Banner = () => {
   return (
     <div>
-      <div className="hero  bg-[#1313130D] rounded-xl max-w-6xl mx-auto h-[554px] px-32">
-        <div className="hero-content flex-col   lg:flex-row-reverse">
+      <div className="hero  bg-[#1313130D] rounded-xl max-w-6xl mx-auto  px-32 py-10">
+        <div className="hero-content flex-col lg:flex-row-reverse">
           <img
             src="https://i.ibb.co/5MFtXvD/pngwing-1.png"
             className="max-w-sm rounded-lg  "
