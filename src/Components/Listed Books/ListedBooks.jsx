@@ -1,4 +1,20 @@
+import { useEffect, useState } from "react";
+import { useLoaderData } from "react-router-dom";
+import { getStoredReadBook } from "../../Utility/localstorage";
+import BooksCard from "./BooksCard";
+
 const ListedBooks = () => {
+  const books = useLoaderData();
+  const [readBookList, setReadBookList] = useState([]);
+  useEffect(() => {
+    const storedBookIds = getStoredReadBook();
+    if (books.length > 0) {
+      const readBook = books.filter((book) =>
+        storedBookIds.includes(book.bookId)
+      );
+      setReadBookList(readBook);
+    }
+  }, []);
   return (
     <div>
       <div className="max-w-6xl h-28 mx-auto bg-[#1313130D] rounded-xl">
@@ -47,7 +63,13 @@ const ListedBooks = () => {
           <div
             role="tabpanel"
             className="tab-content bg-base-100 border-base-300 rounded-box p-6"
-          ></div>
+          >
+            <div>
+              {readBookList.map((book) => (
+                <BooksCard book={book}></BooksCard>
+              ))}
+            </div>
+          </div>
 
           <input
             type="radio"

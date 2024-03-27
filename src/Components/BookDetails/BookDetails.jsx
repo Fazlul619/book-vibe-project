@@ -1,11 +1,16 @@
 import { useLoaderData, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { saveReadBook } from "../../Utility/localstorage";
 const BookDetails = () => {
   const books = useLoaderData();
   const { bookId } = useParams();
-  const book = books.find((book) => book.bookId == bookId);
-  console.log(book);
+  const idInt = parseInt(bookId);
+  const book = books.find((book) => book.bookId === idInt);
+  const handleRead = () => {
+    saveReadBook(idInt);
+    toast("Book add successfully");
+  };
   return (
     <div>
       <div className="card  lg:card-side shadow-xl max-w-6xl mx-auto mt-28">
@@ -71,7 +76,9 @@ const BookDetails = () => {
           </div>
 
           <div className="card-actions justify-stat">
-            <button className="btn btn-outline">Read</button>
+            <button onClick={handleRead} className="btn btn-outline">
+              Read
+            </button>
             <button className="btn btn-info">Wishlist</button>
           </div>
         </div>
