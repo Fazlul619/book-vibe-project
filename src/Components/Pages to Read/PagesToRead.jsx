@@ -43,7 +43,10 @@ const PagesToRead = () => {
     });
   }, []);
   return (
-    <div>
+    <div
+      className="bg-[#13131308] rounded-xl mt-14"
+      style={{ width: "100%", height: 522 }}
+    >
       <ResponsiveContainer>
         <BarChart
           width={1600}
