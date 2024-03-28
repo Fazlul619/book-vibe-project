@@ -8,6 +8,7 @@ import ListedBooks from "./Components/Listed Books/ListedBooks.jsx";
 import PagesToRead from "./Components/Pages to Read/PagesToRead.jsx";
 import ErrorPage from "./Components/ErrorPage/ErrorPage.jsx";
 import BookDetails from "./Components/BookDetails/BookDetails.jsx";
+import SignInForm from "./Components/SignInForm/SignInForm.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -27,6 +28,11 @@ const router = createBrowserRouter([
         path: "/pagesToRead",
         element: <PagesToRead></PagesToRead>,
       },
+      {
+        path: "/signIn",
+        element: <SignInForm></SignInForm>,
+      },
+
       {
         path: "/book/:bookId",
         element: <BookDetails></BookDetails>,

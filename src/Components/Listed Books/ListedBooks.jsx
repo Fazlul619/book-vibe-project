@@ -7,6 +7,7 @@ import WishBookCard from "./WishBookCard";
 
 const ListedBooks = () => {
   const books = useLoaderData();
+
   const [readBookList, setReadBookList] = useState([]);
   const [wishBookList, setWishBookList] = useState([]);
   const [displayReadBookList, setDisplayReadBookList] = useState([]);
@@ -28,6 +29,7 @@ const ListedBooks = () => {
   };
   useEffect(() => {
     const storedBookIds = getStoredReadBook();
+    console.log(storedBookIds);
     if (books.length > 0) {
       const readBook = books.filter((book) =>
         storedBookIds.includes(book.bookId)

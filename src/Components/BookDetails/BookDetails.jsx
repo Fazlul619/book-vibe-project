@@ -1,20 +1,40 @@
 import { useLoaderData, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { saveReadBook } from "../../Utility/localstorage";
+import { getStoredReadBook, saveReadBook } from "../../Utility/localstorage";
 import { saveWishlist } from "../../Utility/locatstorageWishlist";
+
 const BookDetails = () => {
   const books = useLoaderData();
+  const storedBookIds = getStoredReadBook();
   const { bookId } = useParams();
   const idInt = parseInt(bookId);
   const book = books.find((book) => book.bookId === idInt);
+  const refresh = () => {
+    window.setTimeout(function () {
+      window.location.reload();
+    }, 3000);
+  };
   const handleRead = () => {
-    saveReadBook(idInt);
-    toast("Book add successfully in Read Books");
+    const existingBook = storedBookIds.find((bookId) => bookId === idInt);
+    if (existingBook) {
+      toast.warning("Already");
+    } else {
+      saveReadBook(idInt);
+      toast.success("Book add successfully in Read Books");
+      refresh();
+    }
   };
   const handleWish = () => {
-    saveWishlist(idInt);
-    toast("Book add successfully in Wishlist Book");
+    const existingBookInReadList = storedBookIds.find(
+      (bookId) => bookId === idInt
+    );
+    if (existingBookInReadList) {
+      toast.warning("You can't add");
+    } else {
+      saveWishlist(idInt);
+      toast("Book add successfully in Wishlist Book");
+    }
   };
   return (
     <div>
