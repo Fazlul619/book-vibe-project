@@ -9,6 +9,7 @@ import PagesToRead from "./Components/Pages to Read/PagesToRead.jsx";
 import ErrorPage from "./Components/ErrorPage/ErrorPage.jsx";
 import BookDetails from "./Components/BookDetails/BookDetails.jsx";
 import SignInForm from "./Components/SignInForm/SignInForm.jsx";
+import SignUp from "./Components/SignUpForm/SignUp.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -32,7 +33,10 @@ const router = createBrowserRouter([
         path: "/signIn",
         element: <SignInForm></SignInForm>,
       },
-
+      {
+        path: "/signUp",
+        element: <SignUp></SignUp>,
+      },
       {
         path: "/book/:bookId",
         element: <BookDetails></BookDetails>,

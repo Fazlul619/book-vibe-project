@@ -13,12 +13,12 @@ const BookDetails = () => {
   const refresh = () => {
     window.setTimeout(function () {
       window.location.reload();
-    }, 3000);
+    }, 2000);
   };
   const handleRead = () => {
     const existingBook = storedBookIds.find((bookId) => bookId === idInt);
     if (existingBook) {
-      toast.warning("Already");
+      toast.warning("Already added in Read Books");
     } else {
       saveReadBook(idInt);
       toast.success("Book add successfully in Read Books");

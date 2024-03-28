@@ -16,6 +16,9 @@ const Header = () => {
       <li>
         <NavLink to="/signIn">Sign In Form</NavLink>
       </li>
+      <li>
+        <NavLink to="/signUp">Sign Up Form</NavLink>
+      </li>
     </>
   );
   return (
@@ -56,8 +59,9 @@ const Header = () => {
         <Link to="/signIn">
           <a className="btn bg-[#23BE0A] text-white mr-4">Sign In</a>
         </Link>
-
-        <a className="btn bg-[#59C6D2] text-white">Sign Up</a>
+        <Link to="/signUp">
+          <a className="btn bg-[#59C6D2] text-white">Sign Up</a>
+        </Link>
       </div>
     </div>
   );
