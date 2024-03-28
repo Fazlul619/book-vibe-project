@@ -2,10 +2,30 @@ import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { getStoredReadBook } from "../../Utility/localstorage";
 import BooksCard from "./BooksCard";
+import { getStoredWishlist } from "../../Utility/locatstorageWishlist";
+import WishBookCard from "./WishBookCard";
 
 const ListedBooks = () => {
   const books = useLoaderData();
   const [readBookList, setReadBookList] = useState([]);
+  const [wishBookList, setWishBookList] = useState([]);
+  const [displayReadBookList, setDisplayReadBookList] = useState([]);
+  const handleReadBookFilter = (filter) => {
+    if (filter === "Rating") {
+      const sortedBooks = [...readBookList].sort((a, b) => b.rating - a.rating);
+      setDisplayReadBookList(sortedBooks);
+    } else if (filter === "Number of Pages") {
+      const sortedBooks = [...readBookList].sort(
+        (a, b) => b.totalPages - a.totalPages
+      );
+      setDisplayReadBookList(sortedBooks);
+    } else if (filter === "Publisher year") {
+      const sortedBooks = [...readBookList].sort(
+        (a, b) => b.yearOfPublishing - a.yearOfPublishing
+      );
+      setDisplayReadBookList(sortedBooks);
+    }
+  };
   useEffect(() => {
     const storedBookIds = getStoredReadBook();
     if (books.length > 0) {
@@ -13,6 +33,16 @@ const ListedBooks = () => {
         storedBookIds.includes(book.bookId)
       );
       setReadBookList(readBook);
+      setDisplayReadBookList(readBook);
+    }
+  }, [books]);
+  useEffect(() => {
+    const storedWishListIds = getStoredWishlist();
+    if (books.length > 0) {
+      const wishBook = books.filter((wishBooks) =>
+        storedWishListIds.includes(wishBooks.bookId)
+      );
+      setWishBookList(wishBook);
     }
   }, []);
   return (
@@ -36,13 +66,13 @@ const ListedBooks = () => {
             tabIndex={0}
             className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
           >
-            <li>
+            <li onClick={() => handleReadBookFilter("Rating")}>
               <a className="text-[#131313CC] font-medium">Rating</a>
             </li>
-            <li>
+            <li onClick={() => handleReadBookFilter("Number of Pages")}>
               <a className="text-[#131313CC] font-medium">Number of pages</a>
             </li>
-            <li>
+            <li onClick={() => handleReadBookFilter("Publisher year")}>
               <a className="text-[#131313CC] font-medium">Publisher year</a>
             </li>
           </ul>
@@ -64,9 +94,9 @@ const ListedBooks = () => {
             role="tabpanel"
             className="tab-content bg-base-100 border-base-300 rounded-box p-6"
           >
-            <div>
-              {readBookList.map((book) => (
-                <BooksCard book={book}></BooksCard>
+            <div className="">
+              {displayReadBookList.map((book) => (
+                <BooksCard key={book.id} book={book}></BooksCard>
               ))}
             </div>
           </div>
@@ -81,7 +111,13 @@ const ListedBooks = () => {
           <div
             role="tabpanel"
             className="tab-content bg-base-100 border-base-300 rounded-box p-6"
-          ></div>
+          >
+            <div>
+              {wishBookList.map((wishBook) => (
+                <WishBookCard key={books.id} wishBook={wishBook}></WishBookCard>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>

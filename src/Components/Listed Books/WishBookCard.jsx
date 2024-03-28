@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const BooksCard = ({ book }) => {
+const WishBookCard = ({ wishBook }) => {
   const {
     image,
     bookName,
@@ -13,7 +13,7 @@ const BooksCard = ({ book }) => {
     publisher,
     rating,
     bookId,
-  } = book;
+  } = wishBook;
   return (
     <div>
       <div className="card card-side border-2  border-[#13131326]  mb-4">
@@ -31,7 +31,7 @@ const BooksCard = ({ book }) => {
           <div className=" flex flex-row">
             <span className="font-bold">Tag</span>
 
-            {book.tags.map((tags, idx) => (
+            {wishBook.tags.map((tags, idx) => (
               <span key={idx}>
                 <p className="text-[#23BE0A] bg-[#23BE0A0D] w-28 rounded-xl font-medium text-center ">
                   #{tags}
@@ -76,4 +76,4 @@ const BooksCard = ({ book }) => {
   );
 };
 
-export default BooksCard;
+export default WishBookCard;
